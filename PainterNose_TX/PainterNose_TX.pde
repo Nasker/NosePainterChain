@@ -15,6 +15,7 @@ void setup() {
   size(640, 480);
   oscP5 = new OscP5(this, 4321);
   myRemoteLocation = new NetAddress("127.0.0.1", 1234);
+  //myRemoteLocation = new NetAddress("192.168.1.128", 1234);
   video = new Capture(this, 640/2, 480/2);
   opencv = new OpenCV(this, 640/2, 480/2);
   opencv.loadCascade(OpenCV.CASCADE_FRONTALFACE);  
@@ -44,7 +45,7 @@ void draw() {
       int sizeX = faces[i].width/10;
       int sizeY = faces[i].height/10;
       ellipse(posX, posY, sizeX, sizeY);
-      OscMessage myMessage = new OscMessage("/fuck");
+      OscMessage myMessage = new OscMessage("/painterNose/pos");
       myMessage.add(posX);
       myMessage.add(posY);
       myMessage.add(sizeX);
@@ -58,7 +59,12 @@ void captureEvent(Capture c) {
   c.read();
 }
 
-
-void keyPressed() {
-  if (key == 'c') background(0);
+void keyPrecssed() {
+  if (key == 'c') {
+    OscMessage myMessage = new OscMessage("/painterNose/clear");
+    oscP5.send(myMessage, myRemoteLocation);
+    myMessage.add("clear");
+    oscP5.send(myMessage, myRemoteLocation);
+    background(0);
+  }
 }

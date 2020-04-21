@@ -8,7 +8,7 @@ int posX = 0;
 int posY = 0;
 int sizeX = 0;
 int sizeY = 0;
-
+boolean isClear = false;
 void setup() {
   size(640, 480);
   frameRate(25);
@@ -24,20 +24,23 @@ void draw() {
   stroke(255);
   fill(255);
   ellipse(posX, posY, sizeX, sizeY);
+  if (posX == 0 && posY == 0)
+    background(0);
 }
 
 void oscEvent(OscMessage theOscMessage) {
-  /* print the address pattern and the typetag of the received OscMessage */
-  //println("### received an osc message.");
-  //print(" addrpattern: "+theOscMessage.addrPattern());
-  //println(" typetag: "+theOscMessage.typetag());
-  //println(theOscMessage.get(0).intValue() + "   " + theOscMessage.get(0).intValue());
-  posX = theOscMessage.get(0).intValue()*2;
-  posY = theOscMessage.get(1).intValue()*2;
-  sizeX = theOscMessage.get(2).intValue()*2;
-  sizeY = theOscMessage.get(3).intValue()*2;
+  if (theOscMessage.checkAddrPattern("/painterNose/pos")) {
+    posX = theOscMessage.get(0).intValue()*2;
+    posY = theOscMessage.get(1).intValue()*2;
+    sizeX = theOscMessage.get(2).intValue()*2;
+    sizeY = theOscMessage.get(3).intValue()*2;
+  }
+  if (theOscMessage.checkAddrPattern("/painterNose/clear")) {
+    posX = 0;
+    posY = 0;
+  }
 }
 
-void keyPressed(){
-  if(key == 'c') background(0);
+void keyPressed() {
+  if (key == 'c') background(0);
 }
