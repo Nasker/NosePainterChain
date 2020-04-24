@@ -4,11 +4,8 @@ import netP5.*;
 OscP5 oscP5;
 NetAddress myRemoteLocation;
 
-int posX = 0;
-int posY = 0;
-int sizeX = 0;
-int sizeY = 0;
-boolean isClear = false;
+NosePointsList nosePoints;
+
 void setup() {
   size(640, 480);
   frameRate(25);
@@ -16,28 +13,25 @@ void setup() {
   oscP5 = new OscP5(this, 1234);
 
   myRemoteLocation = new NetAddress("127.0.0.1", 1234);
-  println(posX + "    " +posY);
-  background(0);
+  nosePoints = new NosePointsList();
 }
 
 void draw() {
-  stroke(255);
-  fill(255);
-  ellipse(posX, posY, sizeX, sizeY);
-  if (posX == 0 && posY == 0)
-    background(0);
+  background(0);
+  nosePoints.display();
 }
 
 void oscEvent(OscMessage theOscMessage) {
   if (theOscMessage.checkAddrPattern("/painterNose/pos")) {
-    posX = theOscMessage.get(0).intValue()*2;
-    posY = theOscMessage.get(1).intValue()*2;
-    sizeX = theOscMessage.get(2).intValue()*2;
-    sizeY = theOscMessage.get(3).intValue()*2;
+    int posX = theOscMessage.get(0).intValue()*2;
+    int posY = theOscMessage.get(1).intValue()*2;
+    int sizeX = theOscMessage.get(2).intValue()*2;
+    int sizeY = theOscMessage.get(3).intValue()*2;
+    NosePoint nosePoint = new NosePoint(posX, posY, sizeX);
+    nosePoints.addNosePoint(nosePoint);
   }
   if (theOscMessage.checkAddrPattern("/painterNose/clear")) {
-    posX = 0;
-    posY = 0;
+   nosePoints.clear();
   }
 }
 
