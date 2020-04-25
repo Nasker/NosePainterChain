@@ -30,24 +30,26 @@ void draw() {
   scale(2);
   opencv.loadImage(video);
   opencv.flip(OpenCV.HORIZONTAL);
-  //pushMatrix();
-  //scale(-1,1);
+  pushMatrix();
+  scale(-1.0, 1.0);
+  translate(-width/2, 0);
   image(video, 0, 0);
-  //popMatrix();
+  popMatrix();
   nosePoints.display();
   noFill();
-  stroke(255);
+  stroke(0, 255, 0);
   //strokeWeight(3);
   Rectangle[] faces = opencv.detect();
   //println(faces.length);
-  if (keyPressed == true && key == 'd') {
-    for (int i = 0; i < faces.length; i++) {
-      //println(faces[i].x + "," + faces[i].y);
-      rect(faces[i].x, faces[i].y, faces[i].width, faces[i].height);
-      int posX = faces[i].x + (faces[i].width)/2;
-      int posY = faces[i].y + (faces[i].height)/2;
-      int sizeX = faces[i].width/10;
-      int sizeY = faces[i].height/10;
+  for (int i = 0; i < faces.length; i++) {
+    //println(faces[i].x + "," + faces[i].y);
+    rect(faces[i].x, faces[i].y, faces[i].width, faces[i].height);
+    int posX = faces[i].x + (faces[i].width)/2;
+    int posY = faces[i].y + (faces[i].height)/2;
+    int sizeX = faces[i].width/10;
+    int sizeY = faces[i].height/10;
+    ellipse(posX, posY, 2, 2);
+    if (keyPressed == true && key == 'd') {
       NosePoint nosePoint = new NosePoint(posX, posY, sizeX);
       nosePoints.addNosePoint(nosePoint);
       OscMessage myMessage = new OscMessage("/painterNose/pos");

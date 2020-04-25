@@ -10,7 +10,8 @@ class NosePoint{
   }
   
   void display(){
-    fill(255);
+    noStroke();
+    fill(255,255,255,100);
     ellipse(posX, posY, size, size);
   }
 
