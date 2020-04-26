@@ -10,6 +10,7 @@ void setup() {
 }
 
 void draw() {
+  background(0);
   vManager.captureNShowFrame();
   nosePoints.display();
   ArrayList<NosePoint> nosePointsN = vManager.getFrameNosePoints();
