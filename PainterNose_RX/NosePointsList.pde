@@ -12,6 +12,7 @@ class NosePointsList{
   }
   
   void display(){
+    background(0);
     for(NosePoint point:nosePointsList){
       point.display();
     }
