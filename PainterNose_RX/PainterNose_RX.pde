@@ -1,9 +1,14 @@
 NosePointsList nosePoints;
 OSCCommunication oscComm;
 
+String destIP = "192.168.1.128";
+int portIn = 1234;,
+int portOut = 4321;
+
+
 void setup() {
   size(640, 480);
-  oscComm = new OSCCommunication(this, 1234, 4321);
+  oscComm = new OSCCommunication(this, destIP, portIn, portOut);
   nosePoints = new NosePointsList();
 }
 

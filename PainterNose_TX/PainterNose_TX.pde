@@ -2,10 +2,14 @@ NosePointsList nosePoints;
 OSCCommunication oscComm;
 VideoManager vManager;
 
+String destIP = "192.168.1.128";
+int portIn = 1234;,
+int portOut = 4321;
+
 void setup() {
   size(640, 480);
   vManager = new VideoManager(this);
-  oscComm = new OSCCommunication(this, 4321, 1234);
+  oscComm = new OSCCommunication(this, destIP, portIn, portOut);
   nosePoints = new NosePointsList();
 }
 
