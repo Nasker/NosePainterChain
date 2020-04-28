@@ -19,9 +19,9 @@ class OSCCommunication {
 
   void sendNosePoint(NosePoint nosePoint) {
     OscMessage myMessage = new OscMessage("/painterNose/pos");
-    myMessage.add(float(nosePoint.posX));
-    myMessage.add(float(nosePoint.posY));
-    myMessage.add(float(nosePoint.size));
+    myMessage.add(nosePoint.posX);
+    myMessage.add(nosePoint.posY);
+    myMessage.add(nosePoint.size);
     oscP5.send(myMessage, myRemoteLocation);
   }
 }

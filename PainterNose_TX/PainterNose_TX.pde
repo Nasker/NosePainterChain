@@ -3,7 +3,7 @@ OSCCommunication oscComm;
 VideoManager vManager;
 
 String destIP = "192.168.1.128";
-int portIn = 1234;,
+int portIn = 1234;
 int portOut = 4321;
 
 void setup() {

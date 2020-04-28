@@ -1,9 +1,9 @@
 NosePointsList nosePoints;
 OSCCommunication oscComm;
 
-String destIP = "192.168.1.128";
-int portIn = 1234;,
-int portOut = 4321;
+String destIP = "localhost";
+int portIn = 4321;
+int portOut = 1234;
 
 
 void setup() {
