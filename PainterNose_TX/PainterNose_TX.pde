@@ -2,7 +2,7 @@ NosePointsList nosePoints;
 OSCCommunication oscComm;
 VideoManager vManager;
 
-String destIP = "192.168.1.128";
+String destIP = "192.168.1.129";
 int portIn = 1234;
 int portOut = 4321;
 
